@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 430338}
   - 114: {fileID: 11497560}
   m_Layer: 0
-  m_Name: NoopAppPrefab
+  m_Name: Noop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39,13 +39,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8ecf237a39768347ad8bb1c553641a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  iconTexture: {fileID: 21300000, guid: 04b3014af1e52d94a82d91e1cfa4b268, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: iconTexture
+      value: 
+      objectReference: {fileID: 21300000, guid: 04b3014af1e52d94a82d91e1cfa4b268,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: appName
+      value: noop
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: sceneName
+      value: cube
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Name
+      value: Noop
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 172524}

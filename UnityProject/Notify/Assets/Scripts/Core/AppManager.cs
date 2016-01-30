@@ -9,11 +9,10 @@ public class AppManager : MonoBehaviour
 	private static AppManager _staticAppManager;
 
 	private bool _enableNextFrame;
-	public List<App> apps = new List<App>();
+	public List<AppBehaviour> apps = new List<AppBehaviour>();
 	public CanvasGroup canvasGroup;
 
 	public RectTransform iconPanel;
-	public List<App> installedApps = new List<App>();
 
 	private readonly Dictionary<string, AppBehaviour> _appInstances = new Dictionary<string, AppBehaviour>(); 
 
@@ -26,28 +25,30 @@ public class AppManager : MonoBehaviour
 	{
 		_staticAppManager = this;
 
-		foreach (var installedApp in installedApps)
+		foreach (var app in apps)
 		{
-			var appIcon = new GameObject(installedApp.appName, typeof (Image), typeof (Button), typeof (AppIcon)).GetComponent<AppIcon>();
+			var appName = app.name;
+
+			var appIcon = new GameObject(appName, typeof (Image), typeof (Button), typeof (AppIcon)).GetComponent<AppIcon>();
 
 			appIcon.transform.SetParent(iconPanel);
 
-			appIcon.GetComponent<AppIcon>().Initialize(this, installedApp);
+			appIcon.GetComponent<AppIcon>().Initialize(this, app);
 
-			_appInstances.Add(installedApp.appName, appIcon.GetAppBehaviour());
+			_appInstances.Add(appName, appIcon.GetAppBehaviour());
 		}
 	}
 
-	public void AppLaunched(App app)
+	public void AppLaunched(AppBehaviour app)
 	{
 		canvasGroup.interactable = false;
 		canvasGroup.alpha = 0;
-		SceneManager.LoadScene(app.sceneName, LoadSceneMode.Additive);
+		SceneManager.LoadScene(app.name, LoadSceneMode.Additive);
 	}
 
-	public void AppDone(App app)
+	public void AppDone(AppBehaviour app)
 	{
-		SceneManager.UnloadScene(app.sceneName);
+		SceneManager.UnloadScene(app.name);
 
 		_enableNextFrame = true;
 	}

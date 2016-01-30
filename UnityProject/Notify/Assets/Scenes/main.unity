@@ -226,8 +226,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 137291153}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.16949825, y: 0.63498473, z: -0.14553913, w: 0.7395155}
+  m_LocalPosition: {x: 297.57135, y: 149.7561, z: -43.473736}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -300,6 +300,14 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11475848, guid: 1fd94f5bcf09ae646a3e37e8ff50353d, type: 2}
+      propertyPath: apps.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11475848, guid: 1fd94f5bcf09ae646a3e37e8ff50353d, type: 2}
+      propertyPath: installedApps.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 443984, guid: 1fd94f5bcf09ae646a3e37e8ff50353d, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -336,6 +344,21 @@ Prefab:
       propertyPath: canvasGroup
       value: 
       objectReference: {fileID: 1976355688}
+    - target: {fileID: 11475848, guid: 1fd94f5bcf09ae646a3e37e8ff50353d, type: 2}
+      propertyPath: apps.Array.data[1]
+      value: 
+      objectReference: {fileID: 11415084, guid: b2bae6a686a1c9444b3c428a823db339,
+        type: 2}
+    - target: {fileID: 11475848, guid: 1fd94f5bcf09ae646a3e37e8ff50353d, type: 2}
+      propertyPath: installedApps.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 14a0cac1de307ed4b8736e5a93f7cbee,
+        type: 2}
+    - target: {fileID: 11475848, guid: 1fd94f5bcf09ae646a3e37e8ff50353d, type: 2}
+      propertyPath: apps.Array.data[0]
+      value: 
+      objectReference: {fileID: 11497560, guid: 08b992b0595af00438827bbf9474da52,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1fd94f5bcf09ae646a3e37e8ff50353d, type: 2}
   m_IsPrefabParent: 0

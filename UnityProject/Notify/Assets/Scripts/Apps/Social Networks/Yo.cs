@@ -5,8 +5,6 @@ public class Yo : AppBehaviour {
     public override void Launch()
     {
         Debug.Log("yo");
-
-
     }
 
     public override void Cleanup()

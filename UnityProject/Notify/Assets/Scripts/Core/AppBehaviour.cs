@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class AppBehaviour : MonoBehaviour
 {
+	public Sprite iconTexture;
+
 	public enum AppEvent
 	{
 		Done
