@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Noop : AppBehaviourBase
+public class Noop : AppBehaviour
 {
     private bool _isActive;
 

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Yo : AppBehaviourBase {
+public class Yo : AppBehaviour {
     public override void Launch()
     {
         Debug.Log("yo");

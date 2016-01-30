@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,6 +15,8 @@ public class AppManager : MonoBehaviour
 	public RectTransform iconPanel;
 	public List<App> installedApps = new List<App>();
 
+	private readonly Dictionary<string, AppBehaviour> _appInstances = new Dictionary<string, AppBehaviour>(); 
+
 	public static AppManager GetSingleton()
 	{
 		return _staticAppManager;
@@ -25,10 +28,13 @@ public class AppManager : MonoBehaviour
 
 		foreach (var installedApp in installedApps)
 		{
-			var appIcon = new GameObject(installedApp.appName, typeof (Image), typeof (Button), typeof (AppIcon));
+			var appIcon = new GameObject(installedApp.appName, typeof (Image), typeof (Button), typeof (AppIcon)).GetComponent<AppIcon>();
+
 			appIcon.transform.SetParent(iconPanel);
 
 			appIcon.GetComponent<AppIcon>().Initialize(this, installedApp);
+
+			_appInstances.Add(installedApp.appName, appIcon.GetAppBehaviour());
 		}
 	}
 
@@ -46,7 +52,8 @@ public class AppManager : MonoBehaviour
 		_enableNextFrame = true;
 	}
 
-	public void Update()
+	[UsedImplicitly]
+	private void Update()
 	{
 		CheckEnable();
 	}
@@ -59,5 +66,10 @@ public class AppManager : MonoBehaviour
 
 		canvasGroup.interactable = true;
 		canvasGroup.alpha = 1;
+	}
+
+	public AppBehaviour GetAppBehaviour(string appName)
+	{
+		return _appInstances[appName];
 	}
 }
