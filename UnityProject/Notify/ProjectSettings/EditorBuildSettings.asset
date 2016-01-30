@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/OS/main.unity
+    path: Assets/Main/main.unity
   - enabled: 1
     path: Assets/Apps/Noop/Noop.unity
   - enabled: 1
