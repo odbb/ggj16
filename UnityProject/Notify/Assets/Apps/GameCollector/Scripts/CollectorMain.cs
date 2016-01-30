@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 namespace GameCollector
 {
@@ -29,12 +30,18 @@ namespace GameCollector
 			}
 		}
 
+		//----------------------------------------------------------------------------------
+		// Inspector Variables
+		//----------------------------------------------------------------------------------
+
+		[SerializeField] private Text coinDisplay = null;
 
 		//----------------------------------------------------------------------------------
 		// Member Variables
 		//----------------------------------------------------------------------------------
 
 		int m_Coins = 0;
+		string m_CoinFormat = null;
 
 		//----------------------------------------------------------------------------------
 		// Properties
@@ -43,7 +50,11 @@ namespace GameCollector
 		public int Coins
 		{
 			get{ return m_Coins; }
-			set{ m_Coins = value; }
+			set
+			{
+				m_Coins = value;
+				coinDisplay.text = string.Format( m_CoinFormat, m_Coins.ToString() );
+			}
 		}
 
 		//----------------------------------------------------------------------------------
@@ -61,6 +72,9 @@ namespace GameCollector
 			}
 			else
 				singletonInstance = this;
+
+			m_CoinFormat = coinDisplay.text;
+			Coins = 10;
 		}
 
 		//----------------------------------------------------------------------------------
