@@ -12,11 +12,9 @@ public class AppManager : MonoBehaviour {
 	    foreach (var installedApp in installedApps)
 	    {
 	        var appIcon = new GameObject(installedApp.appName, typeof(Image), typeof(Button), typeof(AppIcon));
-	        appIcon.GetComponent<AppIcon>().manager = this;
-	        appIcon.GetComponent<AppIcon>().app = installedApp;
-	        appIcon.GetComponent<AppIcon>().Initialize();
+            appIcon.transform.SetParent(iconPanel);
 
-	        appIcon.transform.SetParent(iconPanel);
+            appIcon.GetComponent<AppIcon>().Initialize(this, installedApp);
 	    }
 	}
 

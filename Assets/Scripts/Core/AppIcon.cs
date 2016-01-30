@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,14 +14,16 @@ public class AppIcon : MonoBehaviour
 
     private void LaunchApp()
     {
-
         manager.AppLaunched(app);
 
         _appBehaviourInstance.Launch();
     }
 
-    public void Initialize()
+    public void Initialize(AppManager appManager, App installedApp)
     {
+        manager = appManager;
+        app = installedApp;
+
         GetComponent<Image>().sprite = app.iconTexture;
         GetComponent<Button>().onClick.AddListener(LaunchApp);
 
