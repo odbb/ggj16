@@ -22,6 +22,9 @@ public class AppManager : MonoBehaviour
 	public Transform instanceContainer;
 
 	private readonly Dictionary<string, AppBehaviour> _appInstances = new Dictionary<string, AppBehaviour>(); 
+	private readonly Dictionary<string, int> _appNotifications = new Dictionary<string, int>();
+
+	public AppIcon appIconTemplate;
 
 	public static AppManager GetSingleton()
 	{
@@ -36,13 +39,14 @@ public class AppManager : MonoBehaviour
 		{
 			var appName = app.name;
 
-			var appIcon = new GameObject(appName, typeof (Image), typeof (Button), typeof (AppIcon)).GetComponent<AppIcon>();
+			var appIcon = Instantiate(appIconTemplate);
 
 			appIcon.transform.SetParent(iconPanel);
 
 			appIcon.GetComponent<AppIcon>().Initialize(this, app);
 
 			_appInstances.Add(appName.ToLower(), appIcon.GetAppBehaviour());
+			_appNotifications.Add(appName.ToLower(), 0);
 		}
 	}
 
@@ -95,5 +99,10 @@ public class AppManager : MonoBehaviour
 	public AppBehaviour GetAppBehaviour(string appName)
 	{
 		return _appInstances[appName.ToLower()];
+	}
+
+	public void AddAppNotification(AppBehaviour app, INotification notificationData)
+	{
+//		_appNotifications[app.name]++;
 	}
 }

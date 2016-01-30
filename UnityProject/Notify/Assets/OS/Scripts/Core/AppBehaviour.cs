@@ -8,19 +8,22 @@ public abstract class AppBehaviour : MonoBehaviour
 
 	public enum AppEvent
 	{
-		Done
+		Done,
+		Notification
 	}
 
-	private readonly Dictionary<AppEvent, HashSet<Action>> eventListeners = new Dictionary<AppEvent, HashSet<Action>>();
+	public delegate void EventHandler(object data);
 
-	public void On(AppEvent evt, Action listener)
+	private readonly Dictionary<AppEvent, HashSet<EventHandler>> _eventListeners = new Dictionary<AppEvent, HashSet<EventHandler>>();
+
+	public void On(AppEvent evt, EventHandler listener)
 	{
-		if (!eventListeners.ContainsKey(evt))
+		if (!_eventListeners.ContainsKey(evt))
 		{
-			eventListeners[evt] = new HashSet<Action>();
+			_eventListeners[evt] = new HashSet<EventHandler>();
 		}
 
-		eventListeners[evt].Add(listener);
+		_eventListeners[evt].Add(listener);
 	}
 
 	public void Kill()
@@ -28,13 +31,13 @@ public abstract class AppBehaviour : MonoBehaviour
 		DispatchEvent(AppEvent.Done);
 	}
 
-	private void DispatchEvent(AppEvent evt)
+	private void DispatchEvent(AppEvent evt, object eventData = null)
 	{
-		if (!eventListeners.ContainsKey(evt)) return;
+		if (!_eventListeners.ContainsKey(evt)) return;
 
-		foreach (var action in eventListeners[evt])
+		foreach (var action in _eventListeners[evt])
 		{
-			action();
+			action(eventData);
 		}
 	}
 
@@ -50,6 +53,6 @@ public abstract class AppBehaviour : MonoBehaviour
 
 	public void SendNotification(INotification notification)
 	{
-		
+		DispatchEvent(AppEvent.Notification, notification);
 	}
 }

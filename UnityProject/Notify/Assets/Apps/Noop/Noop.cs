@@ -3,12 +3,22 @@ using System.Collections;
 
 public class Noop : AppBehaviour
 {
-    public override void Launch()
-    {
-    }
+	private void Start()
+	{
+		StartCoroutine(Spam());
+	}
 
+	private IEnumerator Spam()
+	{
+		while (isActiveAndEnabled)
+		{
+			yield return new WaitForSeconds(Random.value);
 
-    public override void Cleanup()
-    {
-    }
+			SendNotification(new NoopNotification());
+		}
+	}
+}
+
+internal class NoopNotification : INotification
+{
 }

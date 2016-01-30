@@ -5,8 +5,13 @@ using UnityEngine.UI;
 public class AppIcon : MonoBehaviour
 {
 	public AppManager manager;
-	public AppBehaviour appBehaviourPrefab;
+	public AppBehaviour app;
 	private AppBehaviour _appBehaviourInstance;
+
+	public CanvasGroup notificationGroup;
+	public Text notificationText;
+
+	private int _numNotifications = 0;
 
 	public void Start()
 	{
@@ -14,7 +19,7 @@ public class AppIcon : MonoBehaviour
 
 	private void LaunchApp()
 	{
-		manager.AppLaunched(appBehaviourPrefab);
+		manager.AppLaunched(app);
 
 		_appBehaviourInstance.Launch();
 	}
@@ -22,21 +27,41 @@ public class AppIcon : MonoBehaviour
 	public void Initialize(AppManager appManager, AppBehaviour installedApp)
 	{
 		manager = appManager;
-		appBehaviourPrefab = installedApp;
+		app = installedApp;
 
-		GetComponent<Image>().sprite = appBehaviourPrefab.iconTexture;
+		GetComponent<Image>().sprite = app.iconTexture;
 		GetComponent<Button>().onClick.AddListener(LaunchApp);
 
-		_appBehaviourInstance = Instantiate(appBehaviourPrefab);
+		_appBehaviourInstance = Instantiate(app);
 
 		_appBehaviourInstance.transform.SetParent(appManager.instanceContainer);
 
-		_appBehaviourInstance.On(AppBehaviour.AppEvent.Done, () =>
+		_appBehaviourInstance.On(AppBehaviour.AppEvent.Done, data =>
 		{
 			_appBehaviourInstance.Cleanup();
 
-			manager.AppDone(appBehaviourPrefab);
+			manager.AppDone(app);
 		});
+
+		_appBehaviourInstance.On(AppBehaviour.AppEvent.Notification, data =>
+		{
+			var notificationData = (INotification) data;
+
+			_numNotifications++;
+
+			if (_numNotifications > 0)
+			{
+				ShowNotifications();
+			}
+
+			manager.AddAppNotification(app, notificationData);
+		});
+	}
+
+	private void ShowNotifications()
+	{
+		notificationGroup.alpha = 1;
+		notificationText.text = _numNotifications + "";
 	}
 
 	public AppBehaviour GetAppBehaviour()
