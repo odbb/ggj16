@@ -14,3 +14,4 @@ MonoBehaviour:
   iconTexture: {fileID: 21300000, guid: 04b3014af1e52d94a82d91e1cfa4b268, type: 3}
   appBehaviourPrefab: {fileID: 11497560, guid: 08b992b0595af00438827bbf9474da52, type: 2}
   appName: NOOP
+  sceneName: cube
