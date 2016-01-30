@@ -23,7 +23,7 @@ public abstract class AppBehaviour : MonoBehaviour
 		eventListeners[evt].Add(listener);
 	}
 
-	protected void Kill()
+	public void Kill()
 	{
 		DispatchEvent(AppEvent.Done);
 	}
@@ -38,9 +38,15 @@ public abstract class AppBehaviour : MonoBehaviour
 		}
 	}
 
-	public abstract void Launch();
+	public virtual void Launch()
+	{
+		
+	}
 
-	public abstract void Cleanup();
+	public virtual void Cleanup()
+	{
+		
+	}
 
 	public void SendNotification(INotification notification)
 	{

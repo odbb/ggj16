@@ -29,6 +29,8 @@ public class AppIcon : MonoBehaviour
 
 		_appBehaviourInstance = Instantiate(appBehaviourPrefab);
 
+		_appBehaviourInstance.transform.SetParent(appManager.instanceContainer);
+
 		_appBehaviourInstance.On(AppBehaviour.AppEvent.Done, () =>
 		{
 			_appBehaviourInstance.Cleanup();
