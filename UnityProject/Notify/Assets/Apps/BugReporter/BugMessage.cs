@@ -5,24 +5,24 @@ namespace BugReporter
 {
 	public class BugMessage : MonoBehaviour
 	{
-		public Image profileImage;
-		public Image waveImage;
+		public Image errorImage;
+		public Image warningImage;
 		private BugReporterApp _app;
 
-		private Bug _contact;
+		private Bug _bug;
 
-		public void Initialize (BugReporterApp app, Bug contact)
+		public void Initialize (BugReporterApp app, Bug bug)
 		{
 			_app = app;
-			_contact = contact;
+			_bug = bug;
 
-			profileImage.sprite = contact.profileSprite;
-			waveImage.sprite = contact.waveSprite;
+			errorImage.sprite = bug.errorSprite;
+			warningImage.sprite = bug.warningSprite;
 		}
 
 		public void Dismiss ()
 		{
-			_app.DismissNotification (new BugNotification (_contact));
+			_app.DismissNotification (new BugNotification (_bug));
 		}
 	}
 }

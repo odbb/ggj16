@@ -10,16 +10,16 @@ namespace BugReporter
 	public class BugReporterApp : AppBehaviour
 	{
 
-		public List<Bug> contacts = new List<Bug> ();
-		public List<Sprite> profileSprites = new List<Sprite> ();
+		public List<Bug> bugs = new List<Bug> ();
+		public List<Sprite> errorSprites = new List<Sprite> ();
 
-		public List<Sprite> waveSprites = new List<Sprite> ();
+		public List<Sprite> warningSprites = new List<Sprite> ();
 
 		private static void OnNotificationDismiss (object data)
 		{
-			var yoNotification = (BugNotification)data;
+			var bugNotification = (BugNotification)data;
 
-			yoNotification.contact.isWaiting = false;
+			bugNotification.bug.isWaiting = false;
 		}
 
 		private float _difficulty = 1;
@@ -34,14 +34,14 @@ namespace BugReporter
 
 				_difficulty++;
 
-				var inactiveContacts = contacts.Where (contact => !contact.isWaiting).ToArray ();
+				var inactiveContacts = bugs.Where (bug => !bug.isWaiting).ToArray ();
 
 				if (inactiveContacts.Length > 0) {
-					var contact = inactiveContacts [Random.Range (0, inactiveContacts.Length - 1)];
+					var bug = inactiveContacts [Random.Range (0, inactiveContacts.Length - 1)];
 
-					contact.isWaiting = true;
+					bug.isWaiting = true;
 
-					SendNotification (new BugNotification (contact));
+					SendNotification (new BugNotification (bug));
 				}
 			}
 		}
@@ -49,18 +49,18 @@ namespace BugReporter
 		public override void Launch ()
 		{
 			for (var i = 0; i < 10; ++i) {
-				var profileSprite = profileSprites [Random.Range (0, profileSprites.Count - 1)];
-				var waveSprite = waveSprites [Random.Range (0, waveSprites.Count - 1)];
+				var errorSprite = errorSprites [Random.Range (0, errorSprites.Count - 1)];
+				var warningSprite = warningSprites [Random.Range (0, warningSprites.Count - 1)];
 
-				contacts.Add (new Bug (i) {
+				bugs.Add (new Bug (i) {
 					isWaiting = Random.value >= 0.5f,
-					profileSprite = profileSprite,
-					waveSprite = waveSprite
+					errorSprite = errorSprite,
+					warningSprite = warningSprite
 				});
 			}
 
-			foreach (var contact in contacts.Where(contact => contact.isWaiting)) {
-				SendNotification (new BugNotification (contact));
+			foreach (var bug in bugs.Where(bug => bug.isWaiting)) {
+				SendNotification (new BugNotification (bug));
 			}
 
 			StartCoroutine (Spam ());

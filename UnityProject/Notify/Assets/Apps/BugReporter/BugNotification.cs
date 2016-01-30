@@ -5,16 +5,16 @@ namespace BugReporter
 {
 	public class BugNotification : Notification
 	{
-		public Bug contact;
+		public Bug bug;
 
-		public BugNotification (Bug contact) : base (contact.GetName ())
+		public BugNotification (Bug bug) : base (bug.GetName ())
 		{
 			text = new List<Sprite> {
-				contact.profileSprite,
-				contact.waveSprite
+				bug.errorSprite,
+				bug.warningSprite
 			};
 
-			this.contact = contact;
+			this.bug = bug;
 		}
 	}
 }

@@ -46,7 +46,7 @@ GameObject:
   - 222: {fileID: 22263966}
   - 114: {fileID: 11478244}
   m_Layer: 5
-  m_Name: Profile Image
+  m_Name: Error Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,7 +80,7 @@ GameObject:
   - 224: {fileID: 22441278}
   - 222: {fileID: 22207186}
   m_Layer: 5
-  m_Name: Wave
+  m_Name: Warning
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -132,7 +132,7 @@ GameObject:
   - 114: {fileID: 11437516}
   - 114: {fileID: 11427236}
   m_Layer: 5
-  m_Name: Profile Pic
+  m_Name: Error
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -437,8 +437,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ac66cbb3ea9d4532a860a670d92d436, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  profileImage: {fileID: 11478244}
-  waveImage: {fileID: 11467346}
+  errorImage: {fileID: 11478244}
+  warningImage: {fileID: 11467346}
 --- !u!222 &22207186
 CanvasRenderer:
   m_ObjectHideFlags: 1

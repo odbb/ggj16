@@ -8,11 +8,11 @@ public class BugScript : MonoBehaviour
 {
 	private BugReporterApp _app;
 
-	public BugMessage yoMessagePrefab;
+	public BugMessage bugMessagePrefab;
 
 	public BugReporterApp appPrefab;
 
-	public RectTransform yoContainer;
+	public RectTransform BugsContainer;
 
 	private readonly Dictionary<string, BugMessage> _messages = new Dictionary<string, BugMessage> ();
 
@@ -23,15 +23,15 @@ public class BugScript : MonoBehaviour
 			_app = (BugReporterApp)appManager.GetAppBehaviour ("BugReporter");
 		}
 
-		var waitingContacts = _app.contacts.Where (contact => contact.isWaiting).ToArray ();
+		var waitingBugs = _app.bugs.Where (bug => bug.isWaiting).ToArray ();
 
-		if (waitingContacts.Length == 0) {
+		if (waitingBugs.Length == 0) {
 			_app.Kill ();
 			return;
 		}
 
-		foreach (var contact in waitingContacts) {
-			CreateMessageForContact (contact);
+		foreach (var bug in waitingBugs) {
+			CreateMessageForContact (bug);
 		}
 
 		_app.On (AppBehaviour.AppEvent.DismissNotification, OnDismissNotification);
@@ -48,14 +48,14 @@ public class BugScript : MonoBehaviour
 	{
 		var notificationData = (BugNotification)data;
 
-		CreateMessageForContact (notificationData.contact);
+		CreateMessageForContact (notificationData.bug);
 	}
 
 	private void OnDismissNotification (object data)
 	{
 		var notificationData = (BugNotification)data;
 
-		var contactName = notificationData.contact.GetName ();
+		var contactName = notificationData.bug.GetName ();
 
 		Destroy (_messages [contactName].gameObject);
 
@@ -66,14 +66,14 @@ public class BugScript : MonoBehaviour
 		}
 	}
 
-	private void CreateMessageForContact (Bug contact)
+	private void CreateMessageForContact (Bug bug)
 	{
-		var yoInstance = Instantiate (yoMessagePrefab);
+		var bugInstance = Instantiate (bugMessagePrefab);
 
-		yoInstance.transform.SetParent (yoContainer, false);
+		bugInstance.transform.SetParent (BugsContainer, false);
 
-		yoInstance.Initialize (_app, contact);
+		bugInstance.Initialize (_app, bug);
 
-		_messages [contact.GetName ()] = yoInstance;
+		_messages [bug.GetName ()] = bugInstance;
 	}
 }

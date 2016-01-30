@@ -6,8 +6,8 @@ namespace BugReporter
 	{
 		public int id;
 
-		public Sprite profileSprite;
-		public Sprite waveSprite;
+		public Sprite errorSprite;
+		public Sprite warningSprite;
 
 		public bool isWaiting;
 
