@@ -36,7 +36,7 @@ class BallGameController : MonoBehaviour
 
 	private void Start ()
 	{
-		InitialBalls = 50;
+		InitialBalls = 70;
 
 		_gameOverUI.Setup (this);
 		_hud.Setup (this);
@@ -53,7 +53,7 @@ class BallGameController : MonoBehaviour
 	private void BeginGame ()
 	{
 		GameIsOver = false;
-		Level = 1;
+		Level = 6;
 		SpawnBalls (InitialBalls);
 		BeginRound ();
 	}
@@ -70,10 +70,10 @@ class BallGameController : MonoBehaviour
 
 	private void BeginRound ()
 	{
-		TotalTurns = 5 + (10 - Level);
+		TotalTurns = 2 + (10 - Level);
 		TurnsLeft = TotalTurns;
 		BallsDestroyedThisLevel = 0;
-		BallTargetThisLevel = 5 + Level * 7;
+		BallTargetThisLevel = 2 + Level * 7;
 	}
 
 	private void EndOfRound ()
