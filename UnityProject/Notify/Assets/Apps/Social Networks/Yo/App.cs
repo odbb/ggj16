@@ -48,16 +48,15 @@ namespace Yo
 
 		private float _difficulty = 1;
 
-		private float _maxDifficulty = 20;
+		private const float MaxDifficulty = 20;
 
 		private IEnumerator Spam()
 		{
 			while (isActiveAndEnabled)
 			{
-				yield return new WaitForSeconds(Mathf.Min(_maxDifficulty, 
-					5 / _difficulty + Random.value * 20 / _difficulty));
+				yield return new WaitForSeconds(5 / _difficulty + Random.value * 20 / _difficulty);
 
-				_difficulty++;
+				_difficulty = Mathf.Min(MaxDifficulty, _difficulty + 1);
 
 				var inactiveContacts = contacts.Where(contact => !contact.isWaiting).ToArray();
 
