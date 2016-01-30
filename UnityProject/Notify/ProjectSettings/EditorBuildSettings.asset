@@ -15,3 +15,5 @@ EditorBuildSettings:
     path: Assets/Apps/BallGame/BallGame.unity
   - enabled: 1
     path: Assets/Apps/GameCollector/Game Collector.unity
+  - enabled: 1
+    path: Assets/Apps/BugReporter/BugReporter.unity
