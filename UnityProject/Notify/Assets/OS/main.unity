@@ -263,6 +263,7 @@ MonoBehaviour:
   apps:
   - {fileID: 11497560, guid: 08b992b0595af00438827bbf9474da52, type: 2}
   - {fileID: 11415084, guid: b2bae6a686a1c9444b3c428a823db339, type: 2}
+  - {fileID: 11434952, guid: 1372e2f29400b4ba68089d10d9b88e95, type: 2}
   canvasGroup: {fileID: 1808800927}
   iconPanel: {fileID: 790443336}
   eventSystem: {fileID: 309056740}
