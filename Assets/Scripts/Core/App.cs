@@ -4,7 +4,7 @@ using UnityEngine;
 public class App : ScriptableObject
 {
     public Sprite iconTexture;
-    public AppBehaviour appBehaviourPrefab;
+    public AppBehaviourBase appBehaviourPrefab;
     public string appName;
 
     [MenuItem("Assets/Create/App")]

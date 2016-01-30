@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class AppManager : MonoBehaviour {
@@ -9,40 +8,25 @@ public class AppManager : MonoBehaviour {
 
     public RectTransform iconPanel;
 
-	// Use this for initialization
-	void Start () {
+	public void Start () {
 	    foreach (var installedApp in installedApps)
 	    {
-	        var appIcon = new GameObject(installedApp.appName, typeof(Image), typeof(Button));
-	        appIcon.GetComponent<Image>().sprite = installedApp.iconTexture;
-            appIcon.GetComponent<Button>().onClick.AddListener(CreateLaunchDelegate(installedApp));
+	        var appIcon = new GameObject(installedApp.appName, typeof(Image), typeof(Button), typeof(AppIcon));
+	        appIcon.GetComponent<AppIcon>().manager = this;
+	        appIcon.GetComponent<AppIcon>().app = installedApp;
+	        appIcon.GetComponent<AppIcon>().Initialize();
 
-	        appIcon.transform.parent = iconPanel;
+	        appIcon.transform.SetParent(iconPanel);
 	    }
 	}
 
-    private UnityAction CreateLaunchDelegate(App installedApp)
+    public void AppLaunched(App app)
     {
-        return delegate
-        {
-            var appBehaviourInstance = Instantiate(installedApp.appBehaviourPrefab);
-
-            iconPanel.gameObject.SetActive(false);
-
-            appBehaviourInstance.Launch();
-            appBehaviourInstance.On(AppBehaviour.AppEvent.Done, () =>
-            {
-                appBehaviourInstance.Cleanup();
-
-                Destroy(appBehaviourInstance.gameObject);
-
-                iconPanel.gameObject.SetActive(true);
-            });
-        };
+        iconPanel.gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
-	void Update () {
-	
-	}
+    public void AppDone(App app)
+    {
+        iconPanel.gameObject.SetActive(true);
+    }
 }
