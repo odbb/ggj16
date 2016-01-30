@@ -3,7 +3,6 @@ using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class AppManager : MonoBehaviour
 {
@@ -22,7 +21,7 @@ public class AppManager : MonoBehaviour
 	public Transform instanceContainer;
 
 	private readonly Dictionary<string, AppBehaviour> _appInstances = new Dictionary<string, AppBehaviour>(); 
-	private readonly Dictionary<string, int> _appNotifications = new Dictionary<string, int>();
+	private readonly Dictionary<string, NotificationInfo> _appNotifications = new Dictionary<string, NotificationInfo>();
 
 	public AppIcon appIconTemplate;
 
@@ -33,11 +32,15 @@ public class AppManager : MonoBehaviour
 
 	public void Start()
 	{
+#if UNITY_STANDALONE_WIN
+		Screen.SetResolution(640, 960, false);
+#endif
+
 		_staticAppManager = this;
 
 		foreach (var app in apps)
 		{
-			var appName = app.name;
+			var appName = AppNameLowerCase(app);
 
 			var appIcon = Instantiate(appIconTemplate);
 
@@ -45,21 +48,21 @@ public class AppManager : MonoBehaviour
 
 			appIcon.GetComponent<AppIcon>().Initialize(this, app);
 
-			_appInstances.Add(appName.ToLower(), appIcon.GetAppBehaviour());
-			_appNotifications.Add(appName.ToLower(), 0);
+			_appInstances.Add(appName, appIcon.GetAppBehaviour());
+			_appNotifications.Add(appName, new NotificationInfo());
 		}
 	}
 
 	public void AppLaunched(AppBehaviour app)
 	{
 		DisableMainOS();
-		SceneManager.LoadScene(app.name, LoadSceneMode.Additive);
+		SceneManager.LoadScene(AppNameLowerCase(app), LoadSceneMode.Additive);
 	}
 
 
 	public void AppDone(AppBehaviour app)
 	{
-		SceneManager.UnloadScene(app.name);
+		SceneManager.UnloadScene(AppNameLowerCase(app));
 
 		_enableNextFrame = true;
 	}
@@ -101,8 +104,23 @@ public class AppManager : MonoBehaviour
 		return _appInstances[appName.ToLower()];
 	}
 
-	public void AddAppNotification(AppBehaviour app, INotification notificationData)
+	public void AddAppNotification(AppBehaviour app, Notification notificationData)
 	{
-//		_appNotifications[app.name]++;
+		_appNotifications[AppNameLowerCase(app)].AddNotification(notificationData);
+	}
+
+	public NotificationInfo GetAppNotifications(AppBehaviour app)
+	{
+		return _appNotifications[AppNameLowerCase(app)];
+	}
+
+	private static string AppNameLowerCase(AppBehaviour app)
+	{
+		return app.name.ToLower();
+	}
+
+	public void DismissAppNotification(AppBehaviour app, Notification notificationData)
+	{
+		_appNotifications[AppNameLowerCase(app)].DismissNotification(notificationData);
 	}
 }

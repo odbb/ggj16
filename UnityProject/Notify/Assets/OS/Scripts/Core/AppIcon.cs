@@ -1,17 +1,14 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class AppIcon : MonoBehaviour
 {
-	public AppManager manager;
-	public AppBehaviour app;
 	private AppBehaviour _appBehaviourInstance;
+	public AppBehaviour app;
+	public AppManager manager;
 
 	public CanvasGroup notificationGroup;
 	public Text notificationText;
-
-	private int _numNotifications = 0;
 
 	public void Start()
 	{
@@ -45,23 +42,29 @@ public class AppIcon : MonoBehaviour
 
 		_appBehaviourInstance.On(AppBehaviour.AppEvent.Notification, data =>
 		{
-			var notificationData = (INotification) data;
-
-			_numNotifications++;
-
-			if (_numNotifications > 0)
-			{
-				ShowNotifications();
-			}
+			var notificationData = (Notification) data;
 
 			manager.AddAppNotification(app, notificationData);
+
+			ShowNotifications(manager.GetAppNotifications(app));
+		});
+
+		_appBehaviourInstance.On(AppBehaviour.AppEvent.DismissNotification, data =>
+		{
+			var notificationData = (Notification) data;
+
+			manager.DismissAppNotification(app, notificationData);
+
+			ShowNotifications(manager.GetAppNotifications(app));
 		});
 	}
 
-	private void ShowNotifications()
+	private void ShowNotifications(NotificationInfo appNotifications)
 	{
-		notificationGroup.alpha = 1;
-		notificationText.text = _numNotifications + "";
+		var numNotifications = appNotifications.notifications.Count;
+
+		notificationGroup.alpha = numNotifications > 0 ? 1 : 0;
+		notificationText.text = numNotifications + "";
 	}
 
 	public AppBehaviour GetAppBehaviour()

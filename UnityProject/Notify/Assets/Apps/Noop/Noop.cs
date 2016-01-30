@@ -14,11 +14,8 @@ public class Noop : AppBehaviour
 		{
 			yield return new WaitForSeconds(Random.value);
 
-			SendNotification(new NoopNotification());
+			SendNotification(new Notification("asdf"));
 		}
 	}
 }
 
-internal class NoopNotification : INotification
-{
-}

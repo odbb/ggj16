@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public abstract class AppBehaviour : MonoBehaviour
@@ -9,7 +10,8 @@ public abstract class AppBehaviour : MonoBehaviour
 	public enum AppEvent
 	{
 		Done,
-		Notification
+		Notification,
+		DismissNotification
 	}
 
 	public delegate void EventHandler(object data);
@@ -26,6 +28,12 @@ public abstract class AppBehaviour : MonoBehaviour
 		_eventListeners[evt].Add(listener);
 	}
 
+
+	public void Off(AppEvent evt, EventHandler listener)
+	{
+		_eventListeners[evt].Remove(listener);
+	}
+
 	public void Kill()
 	{
 		DispatchEvent(AppEvent.Done);
@@ -35,7 +43,7 @@ public abstract class AppBehaviour : MonoBehaviour
 	{
 		if (!_eventListeners.ContainsKey(evt)) return;
 
-		foreach (var action in _eventListeners[evt])
+		foreach (var action in _eventListeners[evt].ToArray())
 		{
 			action(eventData);
 		}
@@ -51,8 +59,14 @@ public abstract class AppBehaviour : MonoBehaviour
 		
 	}
 
-	public void SendNotification(INotification notification)
+	public void SendNotification(Notification notification)
 	{
 		DispatchEvent(AppEvent.Notification, notification);
+	}
+
+
+	public void DismissNotification(Notification notification)
+	{
+		DispatchEvent(AppEvent.DismissNotification, notification);
 	}
 }
