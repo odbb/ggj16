@@ -5,6 +5,7 @@ class BallSpawner : MonoBehaviour
 {
 	private GameObject _ballPrefab;
 	private BallGameController _ballGameController;
+	public GameObject _ballContainer;
 
 	[SerializeField] private float _xFraction = 0.5f;
 
@@ -23,6 +24,7 @@ class BallSpawner : MonoBehaviour
 	{
 		for (int i = 0; i < count; ++i) {
 			var spawnedBall = (GameObject)Instantiate (_ballPrefab, transform.position, Quaternion.identity);
+			spawnedBall.transform.SetParent (_ballContainer.transform);
 			spawnedBall.GetComponent<Ball> ().Setup (_ballGameController);
 			spawnedBall.SetActive (true);
 			spawnedBall.GetComponent<Rigidbody2D> ().velocity = new Vector2 (Random.Range (-3, 3), Random.Range (-2, -4));

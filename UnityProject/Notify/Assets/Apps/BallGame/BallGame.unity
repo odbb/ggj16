@@ -178,7 +178,7 @@ Camera:
   m_GameObject: {fileID: 351488660}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0.019607844}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -518,11 +518,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 941353291}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.13, y: -0.78, z: 0}
+  m_LocalPosition: {x: -147.46812, y: -254.02776, z: 3.7136536}
   m_LocalScale: {x: 4.8059587, y: 4.805958, z: 4.805958}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_Father: {fileID: 2050570450}
+  m_RootOrder: 0
 --- !u!114 &941353295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -584,6 +584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbcffa7b4b0ea4872b492e0989f95d3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ballContainer: {fileID: 2050570449}
   _xFraction: 0.75
 --- !u!4 &1014133956
 Transform:
@@ -1182,6 +1183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbcffa7b4b0ea4872b492e0989f95d3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ballContainer: {fileID: 2050570449}
   _xFraction: 0.25
 --- !u!4 &1750288353
 Transform:
@@ -1361,6 +1363,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
+--- !u!1 &2050570449
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 2050570450}
+  m_Layer: 0
+  m_Name: BallContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2050570450
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2050570449}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 137.33812, y: 253.24776, z: -3.7136536}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 941353294}
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
 --- !u!1 &2126660092
 GameObject:
   m_ObjectHideFlags: 0

@@ -26,6 +26,7 @@ class BallGameGameOverUI : MonoBehaviour
 	private void OnRestartPressed ()
 	{
 		gameObject.SetActive (false);
-		_ballGameController.Restart ();
+		//_ballGameController.Restart ();
+		AppManager.GetSingleton ().GetAppBehaviour ("BallGame").Kill ();
 	}
 }
