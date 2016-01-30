@@ -8,20 +8,19 @@ public class BugScript : MonoBehaviour
 {
 	private BugReporterApp _app;
 
-	[FormerlySerializedAs ("bugReporterPrefab")]
-	public Message yoMessagePrefab;
+	public BugMessage yoMessagePrefab;
 
 	public BugReporterApp appPrefab;
 
 	public RectTransform yoContainer;
 
-	private readonly Dictionary<string, Message> _messages = new Dictionary<string, Message> ();
+	private readonly Dictionary<string, BugMessage> _messages = new Dictionary<string, BugMessage> ();
 
 	public void Start ()
 	{
 		var appManager = AppManager.GetSingleton ();
 		if (appManager) {
-			_app = (BugReporterApp)appManager.GetAppBehaviour ("bug");
+			_app = (BugReporterApp)appManager.GetAppBehaviour ("BugReporter");
 		}
 
 		var waitingContacts = _app.contacts.Where (contact => contact.isWaiting).ToArray ();
@@ -71,7 +70,7 @@ public class BugScript : MonoBehaviour
 	{
 		var yoInstance = Instantiate (yoMessagePrefab);
 
-		yoInstance.transform.SetParent (yoContainer);
+		yoInstance.transform.SetParent (yoContainer, false);
 
 		yoInstance.Initialize (_app, contact);
 

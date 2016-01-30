@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace BugReporter
 {
-	public class Message : MonoBehaviour
+	public class BugMessage : MonoBehaviour
 	{
 		public Image profileImage;
 		public Image waveImage;

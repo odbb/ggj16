@@ -40,13 +40,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iconTexture: {fileID: 21300000, guid: 064e5c6f676296247bcddde7096d98e0, type: 3}
-  waveSprites:
-  - {fileID: 21300030, guid: 206f7284801c1c741b46decef6e7e35d, type: 3}
-  - {fileID: 21300110, guid: 206f7284801c1c741b46decef6e7e35d, type: 3}
-  - {fileID: 21302982, guid: 206f7284801c1c741b46decef6e7e35d, type: 3}
-  - {fileID: 21303060, guid: 206f7284801c1c741b46decef6e7e35d, type: 3}
-  - {fileID: 21303138, guid: 206f7284801c1c741b46decef6e7e35d, type: 3}
-  - {fileID: 21303216, guid: 206f7284801c1c741b46decef6e7e35d, type: 3}
   profileSprites:
   - {fileID: 21300000, guid: 206f7284801c1c741b46decef6e7e35d, type: 3}
   - {fileID: 21300002, guid: 206f7284801c1c741b46decef6e7e35d, type: 3}
@@ -1681,6 +1674,13 @@ MonoBehaviour:
   - {fileID: 21303260, guid: 206f7284801c1c741b46decef6e7e35d, type: 3}
   - {fileID: 21303262, guid: 206f7284801c1c741b46decef6e7e35d, type: 3}
   - {fileID: 21303264, guid: 206f7284801c1c741b46decef6e7e35d, type: 3}
+  waveSprites:
+  - {fileID: 21300030, guid: 206f7284801c1c741b46decef6e7e35d, type: 3}
+  - {fileID: 21300110, guid: 206f7284801c1c741b46decef6e7e35d, type: 3}
+  - {fileID: 21302982, guid: 206f7284801c1c741b46decef6e7e35d, type: 3}
+  - {fileID: 21303060, guid: 206f7284801c1c741b46decef6e7e35d, type: 3}
+  - {fileID: 21303138, guid: 206f7284801c1c741b46decef6e7e35d, type: 3}
+  - {fileID: 21303216, guid: 206f7284801c1c741b46decef6e7e35d, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
