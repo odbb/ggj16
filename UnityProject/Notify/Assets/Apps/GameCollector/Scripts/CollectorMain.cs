@@ -35,6 +35,7 @@ namespace GameCollector
 		//----------------------------------------------------------------------------------
 
 		[SerializeField] private Text coinDisplay = null;
+		[SerializeField] private AppBehaviour app = null;
 
 		//----------------------------------------------------------------------------------
 		// Member Variables
@@ -75,6 +76,15 @@ namespace GameCollector
 
 			m_CoinFormat = coinDisplay.text;
 			Coins = 10;
+		}
+
+		//----------------------------------------------------------------------------------
+		// Interaction Methods
+		//----------------------------------------------------------------------------------
+
+		public void Close()
+		{
+			app.Kill();
 		}
 
 		//----------------------------------------------------------------------------------
