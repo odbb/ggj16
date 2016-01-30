@@ -20,8 +20,8 @@ class BallGameHUD : MonoBehaviour
 		if (_ballGameController == null)
 			return;
 
-		_turnsLabel.text = string.Format ("Turns left: {0}", _ballGameController.TurnsLeft);
-		_levelLabel.text = string.Format ("Level: {0}", _ballGameController.Level);
-		_targetLabel.text = string.Format ("Target: {0}/{1}", _ballGameController.BallsDestroyedThisLevel, _ballGameController.BallTargetThisLevel);
+		_turnsLabel.text = string.Format ("{0}", _ballGameController.TurnsLeft);
+		_levelLabel.text = string.Format ("{0}", _ballGameController.Level);
+		_targetLabel.text = string.Format ("{0}/{1}", _ballGameController.BallsDestroyedThisLevel, _ballGameController.BallTargetThisLevel);
 	}
 }

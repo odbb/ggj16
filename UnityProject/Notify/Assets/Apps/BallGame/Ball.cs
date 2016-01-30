@@ -9,7 +9,7 @@ class Ball : MonoBehaviour
 {
 	private BallGameController _ballGameController = null;
 
-	[SerializeField] private Color[] _ballColors;
+	[SerializeField] private Sprite[] _ballColors;
 
 	public int BallColorIndex {
 		get;
@@ -21,7 +21,8 @@ class Ball : MonoBehaviour
 		_ballGameController = ballGameController;
 
 		BallColorIndex = Random.Range (0, _ballColors.Length);
-		GetComponent<SpriteRenderer> ().color = _ballColors [BallColorIndex];
+		//GetComponent<SpriteRenderer> ().sprite = _ballColors [BallColorIndex];
+		GetComponentInChildren<SpriteRenderer> ().sprite = _ballColors [BallColorIndex];
 
 		ballGameController.RegisterBall (this);
 	}

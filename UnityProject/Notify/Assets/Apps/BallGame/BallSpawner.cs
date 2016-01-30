@@ -5,6 +5,7 @@ class BallSpawner : MonoBehaviour
 {
 	private GameObject _ballPrefab;
 	private BallGameController _ballGameController;
+	#pragma warning disable 649
 	public GameObject _ballContainer;
 
 	[SerializeField] private float _xFraction = 0.5f;

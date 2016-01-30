@@ -5,7 +5,7 @@ using UnityEngine.UI;
 class BallGameGameOverUI : MonoBehaviour
 {
 	[SerializeField] private Button _restartButton;
-	private BallGameController _ballGameController;
+	//private BallGameController _ballGameController;
 
 	private void Awake ()
 	{
@@ -14,7 +14,7 @@ class BallGameGameOverUI : MonoBehaviour
 
 	public void Setup (BallGameController ballGameController)
 	{
-		_ballGameController = ballGameController;
+		//_ballGameController = ballGameController;
 		_restartButton.onClick.AddListener (OnRestartPressed);
 	}
 
