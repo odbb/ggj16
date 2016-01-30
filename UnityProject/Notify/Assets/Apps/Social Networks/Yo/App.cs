@@ -46,11 +46,18 @@ namespace Yo
 			yoNotification.contact.isWaiting = false;
 		}
 
+		private float _difficulty = 1;
+
+		private float _maxDifficulty = 20;
+
 		private IEnumerator Spam()
 		{
 			while (isActiveAndEnabled)
 			{
-				yield return new WaitForSeconds(5 + Random.value * 5);
+				yield return new WaitForSeconds(Mathf.Min(_maxDifficulty, 
+					5 / _difficulty + Random.value * 20 / _difficulty));
+
+				_difficulty++;
 
 				var inactiveContacts = contacts.Where(contact => !contact.isWaiting).ToArray();
 
