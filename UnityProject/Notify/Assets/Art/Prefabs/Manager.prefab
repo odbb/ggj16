@@ -11,6 +11,7 @@ GameObject:
   - 223: {fileID: 22379978}
   - 114: {fileID: 11478368}
   - 114: {fileID: 11497220}
+  - 225: {fileID: 22540364}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -128,9 +129,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   apps:
   - {fileID: 11400000, guid: a487bcc89fc972542accf839fcaadde1, type: 2}
+  canvasGroup: {fileID: 22540364}
+  iconPanel: {fileID: 22468836}
   installedApps:
   - {fileID: 11400000, guid: a487bcc89fc972542accf839fcaadde1, type: 2}
-  iconPanel: {fileID: 22468836}
 --- !u!114 &11478368
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -227,6 +229,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &22540364
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 138668}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

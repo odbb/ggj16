@@ -332,6 +332,15 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 11475848, guid: 1fd94f5bcf09ae646a3e37e8ff50353d, type: 2}
+      propertyPath: canvasGroup
+      value: 
+      objectReference: {fileID: 1976355688}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1fd94f5bcf09ae646a3e37e8ff50353d, type: 2}
   m_IsPrefabParent: 0
+--- !u!225 &1976355688 stripped
+CanvasGroup:
+  m_PrefabParentObject: {fileID: 22540364, guid: 1fd94f5bcf09ae646a3e37e8ff50353d,
+    type: 2}
+  m_PrefabInternal: {fileID: 497288194}
