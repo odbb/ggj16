@@ -18,11 +18,14 @@ public class AppManager : MonoBehaviour
 	public Camera mainCamera;
 
 	public Transform instanceContainer;
+	public Transform trayContainer;
 
 	private readonly Dictionary<string, AppBehaviour> _appInstances = new Dictionary<string, AppBehaviour>(); 
 	private readonly Dictionary<string, NotificationInfo> _appNotifications = new Dictionary<string, NotificationInfo>();
 
 	public AppIcon appIconTemplate;
+	public TrayIcon trayIconTemplate;
+	private Dictionary<string, TrayIcon> _trayIcons = new Dictionary<string, TrayIcon>();
 
 	public static AppManager GetSingleton()
 	{
@@ -45,10 +48,17 @@ public class AppManager : MonoBehaviour
 
 			appIcon.transform.SetParent(iconPanel);
 
-			appIcon.GetComponent<AppIcon>().Initialize(this, app);
+			appIcon.Initialize(this, app);
+
+			var trayIcon = Instantiate(trayIconTemplate);
+			trayIcon.Initialize(app);
+			trayIcon.transform.SetParent(trayContainer, false);
 
 			_appInstances.Add(appName, appIcon.GetAppBehaviour());
 			_appNotifications.Add(appName, new NotificationInfo());
+			_trayIcons.Add(appName, trayIcon);
+
+			trayIcon.gameObject.SetActive(false);
 		}
 	}
 
@@ -106,7 +116,17 @@ public class AppManager : MonoBehaviour
 
 	public void AddAppNotification(AppBehaviour app, Notification notificationData)
 	{
-		_appNotifications[AppNameLowerCase(app)].AddNotification(notificationData);
+		var appName = AppNameLowerCase(app);
+		var notificationInfo = _appNotifications[appName];
+
+		var numPrevNotifications = notificationInfo.notifications.Count;
+
+		notificationInfo.AddNotification(notificationData);
+
+		if (numPrevNotifications == 0 && notificationInfo.notifications.Count > 0)
+		{
+			_trayIcons[appName].gameObject.SetActive(true);
+		}
 	}
 
 	public NotificationInfo GetAppNotifications(AppBehaviour app)
@@ -121,6 +141,17 @@ public class AppManager : MonoBehaviour
 
 	public void DismissAppNotification(AppBehaviour app, Notification notificationData)
 	{
-		_appNotifications[AppNameLowerCase(app)].DismissNotification(notificationData);
+		var appName = AppNameLowerCase(app);
+
+		var notificationInfo = _appNotifications[appName];
+
+		var numPrevNotifications = notificationInfo.notifications.Count;
+
+		notificationInfo.DismissNotification(notificationData);
+
+		if (numPrevNotifications != 0 && notificationInfo.notifications.Count == 0)
+		{
+			_trayIcons[appName].gameObject.SetActive(false);
+		}
 	}
 }
