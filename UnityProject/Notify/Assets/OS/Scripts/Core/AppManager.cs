@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -13,8 +14,6 @@ public class AppManager : MonoBehaviour
 	public CanvasGroup canvasGroup;
 
 	public RectTransform iconPanel;
-
-	public EventSystem eventSystem;
 
 	public Camera mainCamera;
 
@@ -55,8 +54,11 @@ public class AppManager : MonoBehaviour
 
 	public void AppLaunched(AppBehaviour app)
 	{
-		DisableMainOS();
-		SceneManager.LoadScene(AppNameLowerCase(app), LoadSceneMode.Additive);
+		var appNameLowerCase = AppNameLowerCase(app);
+
+		DisableMainOS(appNameLowerCase);
+
+		SceneManager.LoadScene(appNameLowerCase, LoadSceneMode.Additive);
 	}
 
 
@@ -73,11 +75,10 @@ public class AppManager : MonoBehaviour
 		CheckEnable();
 	}
 
-	private void DisableMainOS()
+	private void DisableMainOS(string appName)
 	{
 		canvasGroup.interactable = false;
 		canvasGroup.alpha = 0;
-		eventSystem.gameObject.SetActive(false);
 		mainCamera.gameObject.SetActive(false);
 	}
 
@@ -85,7 +86,6 @@ public class AppManager : MonoBehaviour
 	{
 		canvasGroup.interactable = true;
 		canvasGroup.alpha = 1;
-		eventSystem.gameObject.SetActive(true);
 		mainCamera.gameObject.SetActive(true);
 	}
 
