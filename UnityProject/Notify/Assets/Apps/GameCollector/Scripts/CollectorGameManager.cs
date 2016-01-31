@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using UnityEngine.UI;
 
@@ -7,6 +8,18 @@ namespace GameCollector
 	
 	public class CollectorGameManager : MonoBehaviour
 	{
+		static int UtcSeconds
+		{
+			get
+			{
+				DateTime m = new DateTime( 2016,1,1,0,0,0, DateTimeKind.Utc );
+				DateTime n = DateTime.UtcNow;
+
+				TimeSpan s = n-m;
+				return (int)s.TotalSeconds;
+			}
+		}
+
 		//----------------------------------------------------------------------------------
 		// Inspector Variables
 		//----------------------------------------------------------------------------------
@@ -35,7 +48,7 @@ namespace GameCollector
 		//----------------------------------------------------------------------------------
 
 		// these values are recovered on game load
-		float m_LastCollectedAtTime = 0;
+		int m_LastCollectedAtSeconds = 0;
 		int m_Purchased = 0;
 
 		int m_NextPurchaseCost = 1;
@@ -61,7 +74,7 @@ namespace GameCollector
 		void Start()
 		{
 			// load old data
-			m_LastCollectedAtTime = PlayerPrefs.GetFloat( "GameCollector.CollectorGameManager.m_LastCollectedAtTime." + this.name );
+			m_LastCollectedAtSeconds = PlayerPrefs.GetInt( "GameCollector.CollectorGameManager.m_LastCollectedAtSeconds =" + this.name );
 			m_Purchased = PlayerPrefs.GetInt( "GameCollector.CollectorGameManager.m_Purchased." + this.name );
 
 			ui_CollectTime.text = "";
@@ -71,8 +84,8 @@ namespace GameCollector
 			if( m_Purchased == 0 )
 				return;
 
-			float secondsPassed = Time.time - m_LastCollectedAtTime;
-			if( secondsPassed > (float)collectAfterSeconds )
+			int secondsPassed = UtcSeconds - m_LastCollectedAtSeconds;
+			if( (float)secondsPassed > collectAfterSeconds )
 			{
 				SetCollectable();
 			}
@@ -92,15 +105,15 @@ namespace GameCollector
 					ui_PurchaseButton.interactable = false;
 				return;
 			}
-			
-			float secondsPassed = Time.time - m_LastCollectedAtTime;
-			if( secondsPassed > collectAfterSeconds )
+
+			int secondsPassed = UtcSeconds - m_LastCollectedAtSeconds;
+			if( (float)secondsPassed > collectAfterSeconds )
 			{
 				SetCollectable();
 			}
 			else
 			{
-				float progress = secondsPassed / collectAfterSeconds;
+				float progress = (float)secondsPassed / collectAfterSeconds;
 				ui_ProgressSlider.value = progress;
 				ui_CollectTime.text = string.Format( m_TimerFormat, ( (int)(collectAfterSeconds - secondsPassed) ).ToString() );
 			}
@@ -134,7 +147,7 @@ namespace GameCollector
 			CollectorMain.Instance.Coins -= m_NextPurchaseCost;
 
 			if( m_Purchased == 0 )
-				m_LastCollectedAtTime = Time.time;
+				m_LastCollectedAtSeconds = UtcSeconds;
 
 			m_Purchased ++;
 			UpdateCost();
@@ -160,7 +173,9 @@ namespace GameCollector
 
 			m_ReadyForCollection = false;
 			ui_CollectButton.gameObject.SetActive( false );
-			m_LastCollectedAtTime = Time.time;
+			m_LastCollectedAtSeconds = UtcSeconds;
+
+			SNM.Instance.CancelNotification( "Game Collector", this.name );
 		}
 
 		//----------------------------------------------------------------------------------
@@ -170,15 +185,19 @@ namespace GameCollector
 		// AKA the game has exited
 		public void OnDestroy()
 		{
+			if( m_Purchased == 0 )
+				return;
+			
 			// save data
-			PlayerPrefs.SetFloat( "GameCollector.CollectorGameManager.m_LastCollectedAtTime." + this.name, m_LastCollectedAtTime );
+			PlayerPrefs.SetInt( "GameCollector.CollectorGameManager.m_LastCollectedAtSeconds =" + this.name, m_LastCollectedAtSeconds );
 			PlayerPrefs.SetInt( "GameCollector.CollectorGameManager.m_Purchased." + this.name, m_Purchased );
 
 			// Schedule Notification
-			int seconds = Mathf.FloorToInt( collectAfterSeconds - Time.time - m_LastCollectedAtTime );
+			int seconds = Mathf.FloorToInt( collectAfterSeconds - (UtcSeconds - m_LastCollectedAtSeconds) );
 			if( seconds > 0 )
 			{
 				// submit
+				SNM.Instance.ScheduleNotification( "Game Collector", this.name, seconds );
 			}
 		}
 	}
