@@ -22,7 +22,11 @@ namespace BugReporter
 
 		public void Dismiss ()
 		{
-			_app.DismissNotification (new BugNotification (_bug));
+			if (_bug.isWaiting)
+				_app.DismissNotification (new BugNotification (_bug));
+			else
+				_app.SendNotification (new BugNotification (_bug));
+
 		}
 	}
 }
