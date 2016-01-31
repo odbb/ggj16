@@ -89,12 +89,14 @@ public class AppManager : MonoBehaviour
 
 		DisableMainOS();
 
+		_loadedScene = appNameLowerCase;
 		SceneManager.LoadScene(appNameLowerCase, LoadSceneMode.Additive);
 	}
 
 
 	public void AppDone(AppBehaviour app)
 	{
+		_loadedScene = null;
 		SceneManager.UnloadScene(AppNameLowerCase(app));
 
 		_enableNextFrame = true;
@@ -102,10 +104,13 @@ public class AppManager : MonoBehaviour
 
 	public void BeginGame()
 	{
-		_gameBegun = true;
-		_startTime = Time.time;
+		if (!_gameBegun)
+		{
+			_gameBegun = true;
+			_startTime = Time.time;
 
-		EnableMainOS();
+			EnableMainOS();
+		}
 	}
 
 	public Slider slider;
@@ -147,9 +152,25 @@ public class AppManager : MonoBehaviour
 			{
 				_gameBegun = false;
 
+				if (_loadedScene != null)
+				{
+					SceneManager.UnloadScene(_loadedScene);
+					mainCamera.gameObject.SetActive(true);
+					_loadedScene = null;
+				}
+
+				canvasGroup.interactable = false;
+				canvasGroup.alpha = 0;
+
+				winner.gameObject.SetActive(true);
+				winnerText.text = Mathf.RoundToInt(score) + "";
 			}
 		}
 	}
+
+	public RectTransform winner;
+	public Text winnerText;
+	private string _loadedScene;
 
 	private void DisableMainOS()
 	{
