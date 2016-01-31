@@ -174,6 +174,8 @@ namespace GameCollector
 			m_ReadyForCollection = false;
 			ui_CollectButton.gameObject.SetActive( false );
 			m_LastCollectedAtSeconds = UtcSeconds;
+
+			SNM.Instance.CancelNotification( "Game Collector", this.name );
 		}
 
 		//----------------------------------------------------------------------------------
@@ -183,15 +185,19 @@ namespace GameCollector
 		// AKA the game has exited
 		public void OnDestroy()
 		{
+			if( m_Purchased == 0 )
+				return;
+			
 			// save data
 			PlayerPrefs.SetInt( "GameCollector.CollectorGameManager.m_LastCollectedAtSeconds =" + this.name, m_LastCollectedAtSeconds );
 			PlayerPrefs.SetInt( "GameCollector.CollectorGameManager.m_Purchased." + this.name, m_Purchased );
 
 			// Schedule Notification
-			int seconds = Mathf.FloorToInt( collectAfterSeconds - UtcSeconds - m_LastCollectedAtSeconds );
+			int seconds = Mathf.FloorToInt( collectAfterSeconds - (UtcSeconds - m_LastCollectedAtSeconds) );
 			if( seconds > 0 )
 			{
 				// submit
+				SNM.Instance.ScheduleNotification( "Game Collector", this.name, seconds );
 			}
 		}
 	}

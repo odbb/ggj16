@@ -49,6 +49,7 @@ public class AppManager : MonoBehaviour
 			appIcon.transform.SetParent(iconPanel);
 
 			appIcon.Initialize(this, app);
+			//appIcon.gameObject.name.Replace( "(Clone)", "" );
 
 			var trayIcon = Instantiate(trayIconTemplate);
 			trayIcon.Initialize(app);
