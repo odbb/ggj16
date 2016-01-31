@@ -74,7 +74,7 @@ namespace GameCollector
 		void Start()
 		{
 			// load old data
-			m_LastCollectedAtSeconds = PlayerPrefs.GetInt( "GameCollector.CollectorGameManager.m_LastCollectedAtSeconds =" + this.name );
+			m_LastCollectedAtSeconds = PlayerPrefs.GetInt( "GameCollector.CollectorGameManager.m_LastCollectedAtSeconds." + this.name );
 			m_Purchased = PlayerPrefs.GetInt( "GameCollector.CollectorGameManager.m_Purchased." + this.name );
 
 			ui_CollectTime.text = "";
@@ -189,7 +189,7 @@ namespace GameCollector
 				return;
 			
 			// save data
-			PlayerPrefs.SetInt( "GameCollector.CollectorGameManager.m_LastCollectedAtSeconds =" + this.name, m_LastCollectedAtSeconds );
+			PlayerPrefs.SetInt( "GameCollector.CollectorGameManager.m_LastCollectedAtSeconds." + this.name, m_LastCollectedAtSeconds );
 			PlayerPrefs.SetInt( "GameCollector.CollectorGameManager.m_Purchased." + this.name, m_Purchased );
 
 			// Schedule Notification

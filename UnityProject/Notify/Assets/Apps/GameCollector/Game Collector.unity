@@ -2340,7 +2340,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1987638220}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.4349412
+  m_Size: 0.43494117
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -11211,7 +11211,7 @@ MonoBehaviour:
   ui_CollectTime: {fileID: 1464160307}
   ui_CollectButton: {fileID: 723820398}
   ui_PurchaseCost: {fileID: 41539034}
-  startCost: 20
+  startCost: 222
   increaseCostRate: 0.6
   ui_PurchaseButton: {fileID: 1241106452}
   ui_Reward: {fileID: 1026231279}
