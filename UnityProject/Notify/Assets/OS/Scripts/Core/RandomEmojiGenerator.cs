@@ -14,7 +14,7 @@ public class RandomEmojiGenerator : MonoBehaviour {
 
 	private Sprite GetRandomEmojiInternal()
 	{
-		return allEmojis[Random.Range(0, allEmojis.Count - 1)];
+		return allEmojis[Random.Range(0, allEmojis.Count)];
 	}
 
 	public static Sprite GetRandomEmoji()

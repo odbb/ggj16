@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,7 +9,6 @@ namespace Yo
 	public class App : AppBehaviour
 	{
 		public List<Contact> contacts = new List<Contact>();
-		public List<Sprite> profileSprites = new List<Sprite>();
 
 		public List<Sprite> waveSprites = new List<Sprite>();
 
@@ -18,8 +16,8 @@ namespace Yo
 		{
 			for (var i = 0; i < 10; ++i)
 			{
-				var profileSprite = profileSprites[Random.Range(0, profileSprites.Count - 1)];
-				var waveSprite = waveSprites[Random.Range(0, waveSprites.Count - 1)];
+				var profileSprite = RandomEmojiGenerator.GetRandomEmoji();
+				var waveSprite = waveSprites[Random.Range(0, waveSprites.Count)];
 
 				contacts.Add(new Contact(i)
 				{
@@ -62,7 +60,7 @@ namespace Yo
 
 				if (inactiveContacts.Length > 0)
 				{
-					var contact = inactiveContacts[Random.Range(0, inactiveContacts.Length - 1)];
+					var contact = inactiveContacts[Random.Range(0, inactiveContacts.Length)];
 
 					contact.isWaiting = true;
 

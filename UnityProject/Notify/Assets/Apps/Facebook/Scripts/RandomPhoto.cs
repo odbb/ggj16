@@ -7,6 +7,6 @@ public class RandomPhoto : MonoBehaviour {
 
 	public void Start()
 	{
-		GetComponent<Image>().sprite = photos[Random.Range(0, photos.Count - 1)];
+		GetComponent<Image>().sprite = photos[Random.Range(0, photos.Count)];
 	}
 }

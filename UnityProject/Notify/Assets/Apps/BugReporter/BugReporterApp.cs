@@ -37,7 +37,7 @@ namespace BugReporter
 				var inactiveContacts = bugs.Where (bug => !bug.isWaiting).ToArray ();
 
 				if (inactiveContacts.Length > 0) {
-					var bug = inactiveContacts [Random.Range (0, inactiveContacts.Length - 1)];
+					var bug = inactiveContacts [Random.Range (0, inactiveContacts.Length)];
 
 					bug.isWaiting = true;
 
@@ -49,8 +49,8 @@ namespace BugReporter
 		public override void Launch ()
 		{
 			for (var i = 0; i < 10; ++i) {
-				var errorSprite = errorSprites [Random.Range (0, errorSprites.Count - 1)];
-				var warningSprite = warningSprites [Random.Range (0, warningSprites.Count - 1)];
+				var errorSprite = errorSprites [Random.Range (0, errorSprites.Count)];
+				var warningSprite = warningSprites [Random.Range (0, warningSprites.Count)];
 
 				bugs.Add (new Bug (i) {
 					isWaiting = Random.value >= 0.5f,
