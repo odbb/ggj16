@@ -151,6 +151,10 @@ namespace GameCollector
 
 			m_Purchased ++;
 			UpdateCost();
+
+			AudioSource s = GetComponent<AudioSource>();
+			if( s != null )
+				s.Play();
 		}
 
 		void UpdateCost()

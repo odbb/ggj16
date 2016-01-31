@@ -866,7 +866,7 @@ MonoBehaviour:
   score: 0
   scoreText: {fileID: 1458115030}
   speedIndicator: {fileID: 1462451531}
-  timeLimit: 10
+  timeLimit: 60
   trayContainer: {fileID: 1388838991}
   trayIconTemplate: {fileID: 11426060, guid: f6f56f56cab80444f89b69179e3a87ce, type: 2}
   updateInterval: 0.1
