@@ -28,6 +28,8 @@ public class Splash : MonoBehaviour
 
 			if (alpha <= minAlpha)
 			{
+				AppManager.GetSingleton().BeginGame();
+
 				Destroy(gameObject);
 			}
 		}

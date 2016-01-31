@@ -2,30 +2,46 @@
 using System.Linq;
 using JetBrains.Annotations;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class AppManager : MonoBehaviour
 {
 	private static AppManager _staticAppManager;
 
+	private readonly Dictionary<string, AppBehaviour> _appInstances = new Dictionary<string, AppBehaviour>();
+	private readonly Dictionary<string, NotificationInfo> _appNotifications = new Dictionary<string, NotificationInfo>();
+	private readonly Dictionary<string, TrayIcon> _trayIcons = new Dictionary<string, TrayIcon>();
+
 	private bool _enableNextFrame;
+
+	private bool _gameBegun;
+
+	private float _nextUpdateTime;
+
+	private float _startTime;
+
+	public AppIcon appIconTemplate;
 	public List<AppBehaviour> apps = new List<AppBehaviour>();
 	public CanvasGroup canvasGroup;
 
 	public RectTransform iconPanel;
 
+	public Transform instanceContainer;
+
 	public Camera mainCamera;
 
-	public Transform instanceContainer;
+	public float score;
+
+	public Text scoreText;
+
+	public SpeedIndicator speedIndicator;
+
+	public float timeLimit = 120.0f;
 	public Transform trayContainer;
-
-	private readonly Dictionary<string, AppBehaviour> _appInstances = new Dictionary<string, AppBehaviour>(); 
-	private readonly Dictionary<string, NotificationInfo> _appNotifications = new Dictionary<string, NotificationInfo>();
-
-	public AppIcon appIconTemplate;
 	public TrayIcon trayIconTemplate;
-	private Dictionary<string, TrayIcon> _trayIcons = new Dictionary<string, TrayIcon>();
+
+	public float updateInterval = 0.1f;
 
 	public static AppManager GetSingleton()
 	{
@@ -61,13 +77,17 @@ public class AppManager : MonoBehaviour
 
 			trayIcon.gameObject.SetActive(false);
 		}
+
+
+		canvasGroup.interactable = false;
+		canvasGroup.alpha = 0.5f;
 	}
 
 	public void AppLaunched(AppBehaviour app)
 	{
 		var appNameLowerCase = AppNameLowerCase(app);
 
-		DisableMainOS(appNameLowerCase);
+		DisableMainOS();
 
 		SceneManager.LoadScene(appNameLowerCase, LoadSceneMode.Additive);
 	}
@@ -80,13 +100,54 @@ public class AppManager : MonoBehaviour
 		_enableNextFrame = true;
 	}
 
+	public void BeginGame()
+	{
+		_gameBegun = true;
+		_startTime = Time.time;
+
+		EnableMainOS();
+	}
+
 	[UsedImplicitly]
 	private void Update()
 	{
 		CheckEnable();
+
+		if (_gameBegun)
+		{
+			if (Time.time > _nextUpdateTime)
+			{
+				_nextUpdateTime = Time.time + updateInterval;
+
+
+				float numNotifications = _appNotifications.Values
+					.Sum(notificationInfo => notificationInfo.notifications.Count);
+
+				if (numNotifications < 1.0f) // hyper speed time!
+				{
+					score += 1000.0f;
+				}
+				else
+				{
+					score += 100.0f/(5 + numNotifications);
+				}
+
+				speedIndicator.SetNumNotifications(numNotifications);
+
+				scoreText.text = Mathf.RoundToInt(score) + "";
+			}
+
+			var elapsedTime = Time.time - _startTime;
+
+			if (elapsedTime > timeLimit)
+			{
+				_gameBegun = false;
+				DisableMainOS();
+			}
+		}
 	}
 
-	private void DisableMainOS(string appName)
+	private void DisableMainOS()
 	{
 		canvasGroup.interactable = false;
 		canvasGroup.alpha = 0;
@@ -129,6 +190,7 @@ public class AppManager : MonoBehaviour
 			_trayIcons[appName].gameObject.SetActive(true);
 		}
 	}
+
 
 	public NotificationInfo GetAppNotifications(string appName)
 	{
