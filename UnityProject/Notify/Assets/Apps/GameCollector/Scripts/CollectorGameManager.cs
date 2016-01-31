@@ -164,10 +164,11 @@ namespace GameCollector
 		}
 
 		//----------------------------------------------------------------------------------
-		// 'OS' Events
+		// Unity Events
 		//----------------------------------------------------------------------------------
 
-		public void OnMiniGameQuit()
+		// AKA the game has exited
+		public void OnDestroy()
 		{
 			// save data
 			PlayerPrefs.SetFloat( "GameCollector.CollectorGameManager.m_LastCollectedAtTime", m_LastCollectedAtTime );

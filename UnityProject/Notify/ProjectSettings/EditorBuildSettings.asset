@@ -13,3 +13,5 @@ EditorBuildSettings:
     path: Assets/Apps/Social Networks/Yo/Yo.unity
   - enabled: 1
     path: Assets/Apps/BallGame/BallGame.unity
+  - enabled: 1
+    path: Assets/Apps/GameCollector/Game Collector.unity
