@@ -108,6 +108,8 @@ public class AppManager : MonoBehaviour
 		EnableMainOS();
 	}
 
+	public Slider slider;
+
 	[UsedImplicitly]
 	private void Update()
 	{
@@ -139,10 +141,12 @@ public class AppManager : MonoBehaviour
 
 			var elapsedTime = Time.time - _startTime;
 
+			slider.value = elapsedTime/timeLimit;
+
 			if (elapsedTime > timeLimit)
 			{
 				_gameBegun = false;
-				DisableMainOS();
+
 			}
 		}
 	}
