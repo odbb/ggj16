@@ -331,14 +331,14 @@ RectTransform:
   m_GameObject: {fileID: 234214377}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.6158049, y: 1.6158046, z: 1.6158046}
   m_Children: []
   m_Father: {fileID: 1808800923}
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000015258789}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.0000047683716, y: -61.000008}
+  m_SizeDelta: {x: 0, y: -6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &234214379
 MonoBehaviour:
@@ -375,7 +375,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: 00574712197e6974096546555aba5799, type: 3}
-  m_Type: 1
+  m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
@@ -504,6 +504,7 @@ MonoBehaviour:
   mainCamera: {fileID: 137291157}
   score: 0
   scoreText: {fileID: 1458115030}
+  speedIndicator: {fileID: 1462451531}
   timeLimit: 120
   trayContainer: {fileID: 1388838991}
   trayIconTemplate: {fileID: 11426060, guid: f6f56f56cab80444f89b69179e3a87ce, type: 2}
@@ -2512,7 +2513,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 99999999
+  m_Text: 0
 --- !u!222 &1458115031
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2531,7 +2532,7 @@ GameObject:
   - 114: {fileID: 1462451532}
   - 114: {fileID: 1462451531}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Speed Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2592,7 +2593,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21301440, guid: 206f7284801c1c741b46decef6e7e35d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
