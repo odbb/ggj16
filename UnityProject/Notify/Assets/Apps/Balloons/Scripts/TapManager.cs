@@ -18,10 +18,14 @@ namespace Balloons
 
 		void LateUpdate()
 		{
-#if UNITY_EDITOR
-			if( Input.GetMouseButtonDown( 0 ) )
+#if ( UNITY_IOS || UNITY_ANDROID ) && ! UNITY_EDITOR
+			Touch[] touches = Input.touches;
+			for( int i=0; i<touches.Length; ++i )
 			{
-				RaycastHit2D hit = Physics2D.Raycast( castingCamera.ScreenToWorldPoint( Input.mousePosition ), Vector2.zero, 0f );
+				if( touches[i].phase != TouchPhase.Began )
+					continue;
+
+				RaycastHit2D hit = Physics2D.Raycast( castingCamera.ScreenToWorldPoint( touches[i].position ), Vector2.zero, 0f );
 				if( hit.transform != null )
 				{
 					Balloon balloon = hit.transform.GetComponent<Balloon>();
@@ -30,13 +34,9 @@ namespace Balloons
 				}
 			}
 #else
-			Touch[] touches = Input.touches;
-			for( int i=0; i<touches.Length; ++i )
+			if( Input.GetMouseButtonDown( 0 ) )
 			{
-				if( touches[i].phase != TouchPhase.Began )
-					continue;
-
-				RaycastHit2D hit = Physics2D.Raycast( castingCamera.ScreenToWorldPoint( touches[i].position ), Vector2.zero, 0f );
+				RaycastHit2D hit = Physics2D.Raycast( castingCamera.ScreenToWorldPoint( Input.mousePosition ), Vector2.zero, 0f );
 				if( hit.transform != null )
 				{
 					Balloon balloon = hit.transform.GetComponent<Balloon>();
