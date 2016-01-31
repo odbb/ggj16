@@ -46,7 +46,7 @@ public class AppManager : MonoBehaviour
 
 			var appIcon = Instantiate(appIconTemplate);
 
-			appIcon.transform.SetParent(iconPanel);
+			appIcon.transform.SetParent(iconPanel, false);
 
 			appIcon.Initialize(this, app);
 			//appIcon.gameObject.name.Replace( "(Clone)", "" );

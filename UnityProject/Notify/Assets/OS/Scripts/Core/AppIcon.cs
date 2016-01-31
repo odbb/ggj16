@@ -82,6 +82,8 @@ public class AppIcon : MonoBehaviour
 			rectTransform.sizeDelta = new Vector2(48, 48);
 		}
 
+		rectTransform.sizeDelta *= 2;
+
 		notificationText.text = numNotifications + "";
 	}
 
