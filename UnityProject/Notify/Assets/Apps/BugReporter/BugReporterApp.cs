@@ -12,8 +12,9 @@ namespace BugReporter
 
 		public List<Bug> bugs = new List<Bug> ();
 		public List<Sprite> errorSprites = new List<Sprite> ();
-
 		public List<Sprite> warningSprites = new List<Sprite> ();
+		public List<Sprite> noErrorSprites = new List<Sprite> ();
+		public List<Sprite> noWarningSprites = new List<Sprite> ();
 
 		private static void OnNotificationDismiss (object data)
 		{
@@ -46,16 +47,21 @@ namespace BugReporter
 			}
 		}
 
-		public override void Launch ()
+		public void Start ()
 		{
-			for (var i = 0; i < 10; ++i) {
-				var errorSprite = errorSprites [Random.Range (0, errorSprites.Count)];
-				var warningSprite = warningSprites [Random.Range (0, warningSprites.Count)];
+			for (var i = 0; i < 40; ++i) {
+				var randomRange = Random.Range (0, errorSprites.Count);
+				var noRandomRange = Random.Range (0, noErrorSprites.Count);
+				var errorSprite = errorSprites [randomRange];
+				var warningSprite = warningSprites [randomRange];
+				var noErrorSprite = noErrorSprites [noRandomRange];
+				var noWarningSprite = noWarningSprites [noRandomRange];
+				var isWaiting = Random.value >= 0.5f;
 
 				bugs.Add (new Bug (i) {
-					isWaiting = Random.value >= 0.5f,
-					errorSprite = errorSprite,
-					warningSprite = warningSprite
+					isWaiting = isWaiting,
+					errorSprite = isWaiting ? errorSprite : noErrorSprite,
+					warningSprite = isWaiting ? warningSprite : noWarningSprite
 				});
 			}
 
@@ -68,9 +74,5 @@ namespace BugReporter
 			On (AppEvent.DismissNotification, OnNotificationDismiss);
 		}
 
-
-		public override void Cleanup ()
-		{
-		}
 	}
 }
