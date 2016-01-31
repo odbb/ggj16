@@ -2,12 +2,8 @@
 using System.Collections;
 
 public class NoopGame : MonoBehaviour {
-	public void OnGUI()
+	public void Clicked()
 	{
-		GUILayout.Space(46);
-		if (GUILayout.Button("NOPE"))
-		{
-			AppManager.GetSingleton().GetAppBehaviour("noop").Kill();
-		}
+		AppManager.GetSingleton().GetAppBehaviour("noop").Kill();
 	}
 }

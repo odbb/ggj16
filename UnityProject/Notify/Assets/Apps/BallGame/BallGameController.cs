@@ -157,7 +157,6 @@ class BallGameController : MonoBehaviour
 
 	private void EndGame ()
 	{
-		Debug.Log ("Game is over");
 		_gameOverUI.Show ();
 		GameIsOver = true;
 		BallGameSaveSystem.Save ();
