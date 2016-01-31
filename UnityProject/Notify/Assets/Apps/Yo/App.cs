@@ -46,7 +46,7 @@ namespace Yo
 
 		private float _difficulty = 1;
 
-		private const float MaxDifficulty = 20;
+		private const float MaxDifficulty = 5;
 
 		private IEnumerator Spam()
 		{

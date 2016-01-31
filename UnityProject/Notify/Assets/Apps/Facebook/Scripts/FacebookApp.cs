@@ -11,7 +11,7 @@ public class FacebookApp : AppBehaviour {
 	{
 		while (isActiveAndEnabled)
 		{
-			yield return new WaitForSeconds(Random.value * 10);
+			yield return new WaitForSeconds(2 + Random.value * 20);
 
 			SendNotification(new Notification("grandma"));
 		}

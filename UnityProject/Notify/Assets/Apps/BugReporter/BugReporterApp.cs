@@ -25,24 +25,34 @@ namespace BugReporter
 
 		private float _difficulty = 1;
 
-		private float _maxDifficulty = 20;
+		private float _maxDifficulty = 5;
 
 		private IEnumerator Spam ()
 		{
 			while (isActiveAndEnabled) {
-				yield return new WaitForSeconds (Mathf.Min (_maxDifficulty, 
-					5 / _difficulty + Random.value * 20 / _difficulty));
+				yield return new WaitForSeconds ( 
+					5 / _difficulty + Random.value * 20 / _difficulty);
 
-				_difficulty++;
+				_difficulty = Mathf.Min(_maxDifficulty, _difficulty + 1);
 
-				var inactiveContacts = bugs.Where (bug => !bug.isWaiting).ToArray ();
+				var numNotifications = Random.Range(0, 5);
 
-				if (inactiveContacts.Length > 0) {
-					var bug = inactiveContacts [Random.Range (0, inactiveContacts.Length)];
+				for(var i=0; i< numNotifications; ++i)
+				{
+					var inactiveContacts = bugs.Where(bug => !bug.isWaiting).ToArray();
 
-					bug.isWaiting = true;
+					if (inactiveContacts.Length > 0)
+					{
+						var bug = inactiveContacts[Random.Range(0, inactiveContacts.Length)];
 
-					SendNotification (new BugNotification (bug));
+						bug.isWaiting = true;
+
+						SendNotification(new BugNotification(bug));
+					}
+					else
+					{
+						break;
+					}
 				}
 			}
 		}

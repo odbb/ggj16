@@ -129,6 +129,11 @@ public class AppManager : MonoBehaviour
 		}
 	}
 
+	public NotificationInfo GetAppNotifications(string appName)
+	{
+		return _appNotifications[appName.ToLower()];
+	}
+
 	public NotificationInfo GetAppNotifications(AppBehaviour app)
 	{
 		return _appNotifications[AppNameLowerCase(app)];
