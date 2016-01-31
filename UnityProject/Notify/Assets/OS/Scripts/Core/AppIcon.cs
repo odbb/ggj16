@@ -64,6 +64,16 @@ public class AppIcon : MonoBehaviour
 		var numNotifications = appNotifications.notifications.Count;
 
 		notificationGroup.alpha = numNotifications > 0 ? 1 : 0;
+		if (numNotifications < 10)
+		{
+			notificationGroup.GetComponent<RectTransform>().sizeDelta = new Vector2(16,16);
+		} else if (numNotifications < 100)
+		{
+			notificationGroup.GetComponent<RectTransform>().sizeDelta = new Vector2(24,24);
+		} else if (numNotifications < 1000)
+		{
+			notificationGroup.GetComponent<RectTransform>().sizeDelta = new Vector2(32,32);
+		}
 		notificationText.text = numNotifications + "";
 	}
 
