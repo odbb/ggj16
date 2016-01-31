@@ -84,7 +84,9 @@ namespace GameCollector
 
 		public void Close()
 		{
-			app.Kill();
+			AppManager appManager = AppManager.GetSingleton();
+			AppBehaviour activeApp = appManager.GetAppBehaviour( app.name );
+			activeApp.Kill();
 		}
 
 		//----------------------------------------------------------------------------------

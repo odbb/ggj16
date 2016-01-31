@@ -310,6 +310,7 @@ MonoBehaviour:
   - {fileID: 11429750, guid: fe03afee46b7045879c73f32c21f4d29, type: 2}
   - {fileID: 11424074, guid: bd8f163ef427f4268bae098c35d05dbf, type: 2}
   - {fileID: 11481830, guid: 96ac76c1f57f7d44f818a9191320ab8f, type: 2}
+  - {fileID: 11429750, guid: 5d55c0fee809d455aab0f4fd661c1cb8, type: 2}
   canvasGroup: {fileID: 1808800927}
   iconPanel: {fileID: 790443336}
   mainCamera: {fileID: 137291157}
@@ -2044,7 +2045,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 790443335}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 

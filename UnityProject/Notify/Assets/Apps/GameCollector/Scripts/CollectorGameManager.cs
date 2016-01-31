@@ -61,8 +61,8 @@ namespace GameCollector
 		void Start()
 		{
 			// load old data
-			m_LastCollectedAtTime = PlayerPrefs.GetFloat( "GameCollector.CollectorGameManager.m_LastCollectedAtTime" );
-			m_Purchased = PlayerPrefs.GetInt( "GameCollector.CollectorGameManager.m_Purchased" );
+			m_LastCollectedAtTime = PlayerPrefs.GetFloat( "GameCollector.CollectorGameManager.m_LastCollectedAtTime." + this.name );
+			m_Purchased = PlayerPrefs.GetInt( "GameCollector.CollectorGameManager.m_Purchased." + this.name );
 
 			ui_CollectTime.text = "";
 				
@@ -164,14 +164,15 @@ namespace GameCollector
 		}
 
 		//----------------------------------------------------------------------------------
-		// 'OS' Events
+		// Unity Events
 		//----------------------------------------------------------------------------------
 
-		public void OnMiniGameQuit()
+		// AKA the game has exited
+		public void OnDestroy()
 		{
 			// save data
-			PlayerPrefs.SetFloat( "GameCollector.CollectorGameManager.m_LastCollectedAtTime", m_LastCollectedAtTime );
-			PlayerPrefs.SetInt( "GameCollector.CollectorGameManager.m_Purchased", m_Purchased );
+			PlayerPrefs.SetFloat( "GameCollector.CollectorGameManager.m_LastCollectedAtTime." + this.name, m_LastCollectedAtTime );
+			PlayerPrefs.SetInt( "GameCollector.CollectorGameManager.m_Purchased." + this.name, m_Purchased );
 
 			// Schedule Notification
 			int seconds = Mathf.FloorToInt( collectAfterSeconds - Time.time - m_LastCollectedAtTime );
