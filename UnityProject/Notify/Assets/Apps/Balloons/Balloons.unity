@@ -585,10 +585,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1032916919}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e713930d983f44d1a1dfed5731a3cdc, type: 3}
+  m_Script: {fileID: 11500000, guid: 23210376e219e41e5a3566dea3fad9b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconTexture: {fileID: 0}
   balloonPrefabs:
   - {fileID: 11473076, guid: 1798974c86ecd4be99359eee251006a2, type: 2}
   - {fileID: 11408584, guid: d378ddc228f474a4fbbbe2661bd719e1, type: 2}

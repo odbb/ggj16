@@ -16,7 +16,7 @@ namespace Balloons
 		void OnDestroy()
 		{
 			// inform the BalloonsApp
-			BalloonsApp main = FindObjectOfType<BalloonsApp>();
+			BalloonsGame main = FindObjectOfType<BalloonsGame>();
 			main.RemoveBalloon( this );
 		}
 	}
