@@ -39,7 +39,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cbaa7408f97c4a55a77c7529b5894af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconTexture: {fileID: 21300000, guid: 910f8321b748f41c9857bdd87c2e5f95, type: 3}
+  iconTexture: {fileID: 21300000, guid: 0873df1adb5074841bbc6191daeaf23c, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -50,7 +50,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: iconTexture
       value: 
-      objectReference: {fileID: 21300000, guid: 910f8321b748f41c9857bdd87c2e5f95,
+      objectReference: {fileID: 21300000, guid: 0873df1adb5074841bbc6191daeaf23c,
         type: 3}
     - target: {fileID: 0}
       propertyPath: appName
