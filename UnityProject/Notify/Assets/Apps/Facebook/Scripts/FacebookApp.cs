@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Noop : AppBehaviour
-{
+public class FacebookApp : AppBehaviour {
 	private void Start()
 	{
 		StartCoroutine(Spam());
@@ -14,13 +13,7 @@ public class Noop : AppBehaviour
 		{
 			yield return new WaitForSeconds(Random.value * 10);
 
-			SendNotification(new Notification("asdf"));
+			SendNotification(new Notification("grandma"));
 		}
 	}
-
-	public override void Cleanup()
-	{
-		DismissNotification(new Notification("asdf"));
-	}
 }
-

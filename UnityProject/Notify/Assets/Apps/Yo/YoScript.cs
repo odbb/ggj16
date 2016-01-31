@@ -75,7 +75,7 @@ public class YoScript : MonoBehaviour
 	{
 		var yoInstance = Instantiate(yoMessagePrefab);
 
-		yoInstance.transform.SetParent(yoContainer);
+		yoInstance.transform.SetParent(yoContainer, false);
 
 		yoInstance.Initialize(_app, contact);
 
