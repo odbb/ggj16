@@ -30,16 +30,19 @@ namespace Balloons
 			if( PlayerPrefs.HasKey( "Balloons.BalloonsApp.m_BalloonCount" ) )
 				createCount = PlayerPrefs.GetInt( "Balloons.BalloonsApp.m_BalloonCount" );
 
-			float x = spawnRegion.size.x / 2f;
-			float y = spawnRegion.size.y / 2f;
-
-			// create balloons to the count
-			for( int i=0; i<createCount; ++i )
+			if( spawnRegion != null )
 			{
-				CreateBalloon( Random.Range( -x, x ), Random.Range( -y, y ) );
-			}
+				float x = spawnRegion.size.x / 2f;
+				float y = spawnRegion.size.y / 2f;
 
-			Destroy( spawnRegion.gameObject );
+				// create balloons to the count
+				for( int i=0; i<createCount; ++i )
+				{
+					CreateBalloon( Random.Range( -x, x ), Random.Range( -y, y ) );
+				}
+
+				Destroy( spawnRegion.gameObject );
+			}
 		}
 
 		void CreateBalloon( float x, float y )
@@ -66,7 +69,7 @@ namespace Balloons
 				if( m_Balloons[i] == b )
 				{
 					m_Balloons.RemoveAt( i );
-					return;
+					break;
 				}
 			}
 
@@ -75,10 +78,26 @@ namespace Balloons
 				// notifications cleared, save values and return to main
 				PlayerPrefs.SetInt( "Balloons.BalloonsApp.m_BalloonCount", m_BalloonCount + 1 );
 
+				/* // TODO submit this part as a bug report
+				// Because RemoveBalloon is done during OnDestroy, when unloading the scene it crashes
 				AppManager appManager = AppManager.GetSingleton();
 				AppBehaviour activeApp = appManager.GetAppBehaviour( "Balloons" );
-				activeApp.Kill();
+
+				if( activeApp != null )
+					activeApp.Kill();
+				*/
+
+				Invoke( "ToKill", 0.5f );
 			}
+		}
+
+		public void ToKill()
+		{
+			AppManager appManager = AppManager.GetSingleton();
+			AppBehaviour activeApp = appManager.GetAppBehaviour( "Balloons" );
+
+			if( activeApp != null )
+				activeApp.Kill();
 		}
 
 		//----------------------------------------------------------------------------------
